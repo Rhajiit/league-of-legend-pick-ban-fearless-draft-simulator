@@ -6,9 +6,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.env
 
 #개발에 필요한 사항 메모
 todoList.txt
+velog-thumb.jpeg
 
 node_modules
 dist
