@@ -5,7 +5,7 @@ interface onFilterChampionTagType {
   onFilterChampionTag: (championTag: ChampionTagType) => void;
 }
 
-const ChampionFilter = ({
+const ChampionFilterByTag = ({
   tagFilter,
   onFilterChampionTag,
 }: onFilterChampionTagType) => {
@@ -19,4 +19,4 @@ const ChampionFilter = ({
   );
 };
 
-export default ChampionFilter;
+export default ChampionFilterByTag;
