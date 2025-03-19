@@ -24,7 +24,7 @@ const LocalPB = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen overflow-hidden">
       <div className="min-w-96 border">Blue Team</div>
       <div className="w-full border">
         <header className="flex flex-col">
@@ -34,39 +34,46 @@ const LocalPB = () => {
           </div>
 
           <div className="border">
-            {championTypes.map((tag) => (
-              <ChampionFilterByTag
-                key={`champion-filter-button-${tag}`}
-                tagFilter={tag}
-                onFilterChampionTag={handleChampionTagFilter}
+            <div className="flex justify-between">
+              <div>
+                {championTypes.map((tag) => (
+                  <ChampionFilterByTag
+                    key={`champion-filter-button-${tag}`}
+                    tagFilter={tag}
+                    onFilterChampionTag={handleChampionTagFilter}
+                  />
+                ))}
+              </div>
+
+              <input
+                type="text"
+                onChange={(event) => setNameFilter(event.target.value)}
+                className="m-1 h-full border"
               />
-            ))}
-            <input
-              type="text"
-              onChange={(event) => setNameFilter(event.target.value)}
-              className="m-1 h-full border"
-            />
+            </div>
           </div>
         </header>
-        <main className="grid grid-cols-4 overflow-scroll">
-          {Object.keys(championData).map((championName) => {
-            return tagFilter === null && nameFilter === "" ? (
-              <ChampionPortrait
-                key={`champion-id-${championData[championName].key}`}
-                championData={championData[championName]}
-              />
-            ) : (
-              championName.toLowerCase().includes(nameFilter.toLowerCase()) &&
-                (tagFilter === null ||
-                  championData[championName].tags.includes(tagFilter)) && (
-                  <ChampionPortrait
-                    key={`champion-id-${championData[championName].key}`}
-                    championData={championData[championName]}
-                  />
-                )
-            );
-          })}
-        </main>
+        <div className="h-full overflow-y-scroll">
+          <main className="m-auto my-4 grid w-fit grid-cols-6 gap-x-12 gap-y-1">
+            {Object.keys(championData).map((championName) => {
+              return tagFilter === null && nameFilter === "" ? (
+                <ChampionPortrait
+                  key={`champion-id-${championData[championName].key}`}
+                  championData={championData[championName]}
+                />
+              ) : (
+                championName.toLowerCase().includes(nameFilter.toLowerCase()) &&
+                  (tagFilter === null ||
+                    championData[championName].tags.includes(tagFilter)) && (
+                    <ChampionPortrait
+                      key={`champion-id-${championData[championName].key}`}
+                      championData={championData[championName]}
+                    />
+                  )
+              );
+            })}
+          </main>
+        </div>
       </div>
       <div className="min-w-96 border">Red Team</div>
     </div>
