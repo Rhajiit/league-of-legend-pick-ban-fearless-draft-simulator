@@ -6,6 +6,11 @@ import { ChampionDataListType } from "../types/championDataType";
 const championData: ChampionDataListType = championRawData.data;
 
 const LocalPB = () => {
+  const [blueTeamLocalBanList, setBlueTeamLocalBanList] = useState<string[]>(
+    [],
+  );
+  const [redTeamLocalBanList, setRedTeamLocalBanList] = useState<string[]>([]);
+  const [globalBanList, setGlobalBanList] = useState<string[]>([]);
   const [bannedList, setBannedList] = useState<string[]>([]);
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
