@@ -12,6 +12,7 @@ const ChampionFilterByTag = ({
   return (
     <button
       className="m-1 cursor-pointer"
+      type="button"
       onClick={() => onFilterChampionTag(tagFilter)}
     >
       {tagFilter}

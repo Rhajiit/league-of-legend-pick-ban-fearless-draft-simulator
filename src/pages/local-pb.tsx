@@ -14,17 +14,41 @@ const LocalPB = () => {
   const [bannedList, setBannedList] = useState<string[]>([]);
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
-  return (
-    <div className="flex h-screen overflow-hidden">
-      <div className="min-w-96 border">Blue Team</div>
-      <ChampionSelect
-        selectedChampionList={selectedList}
-        bannedChampionList={bannedList}
-        championData={championData}
-      />
+  const handleChampionPickConfirm = () => {};
 
-      <div className="min-w-96 border">Red Team</div>
-    </div>
+  return (
+    <>
+      <div className="flex h-screen overflow-hidden">
+        <div className="flex w-full flex-col justify-between border">
+          <div>
+            <p>Blue Team</p>
+            <div className="mt-8">Blue team selected Champions</div>
+          </div>
+          <div className="h-52">Previous Select</div>
+        </div>
+        <ChampionSelect
+          selectedChampionList={selectedList}
+          bannedChampionList={bannedList}
+          championData={championData}
+        />
+
+        <div className="flex w-full flex-col justify-between border">
+          <div>
+            <p>Red Team</p>
+            <div className="mt-8">Red team selected Champions</div>
+          </div>
+        </div>
+      </div>
+      <div className="fixed bottom-0 left-0 h-52 w-full border">
+        <button
+          type="button"
+          className="mx-auto mt-2 block cursor-pointer border px-10 py-3"
+          onClick={() => handleChampionPickConfirm()}
+        >
+          pick
+        </button>
+      </div>
+    </>
   );
 };
 

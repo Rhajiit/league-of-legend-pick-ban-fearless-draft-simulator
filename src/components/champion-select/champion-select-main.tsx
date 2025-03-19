@@ -32,7 +32,7 @@ const ChampionSelect = ({
   };
 
   return (
-    <div className="w-full border">
+    <div className="w-[40rem] shrink-0 border">
       <header className="flex flex-col">
         <div className="text-center">
           <p>희망 챔피언을 선택하세요!</p>
@@ -59,8 +59,9 @@ const ChampionSelect = ({
           </div>
         </div>
       </header>
-      <div className="h-full overflow-y-scroll">
-        <main className="m-auto my-4 grid w-fit grid-cols-6 gap-x-12 gap-y-1">
+
+      <div className="h-2/3 overflow-y-scroll">
+        <main className="m-auto my-4 grid w-fit grid-cols-6 gap-x-6 gap-y-1">
           {Object.keys(championData).map((championName) => {
             return tagFilter === null && nameFilter === "" ? (
               <ChampionPortrait
