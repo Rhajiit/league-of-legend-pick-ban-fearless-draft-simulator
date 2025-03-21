@@ -6,12 +6,15 @@ import { ChampionDataListType } from "../types/championDataType";
 const championData: ChampionDataListType = championRawData.data;
 
 const LocalPB = () => {
-  const [blueTeamLocalBanList, setBlueTeamLocalBanList] = useState<string[]>(
-    [],
-  );
-  const [redTeamLocalBanList, setRedTeamLocalBanList] = useState<string[]>([]);
   const [globalBanList, setGlobalBanList] = useState<string[]>([]);
-  const [bannedList, setBannedList] = useState<string[]>([]);
+  const [blueTeamFearlessBanList, setBlueTeamFearlessBanList] = useState<
+    string[]
+  >([]);
+  const [redTeamFearlessBanList, setRedTeamFearlessBanList] = useState<
+    string[]
+  >([]);
+  const [currentBlueBanList, setCurrentBlueBanList] = useState<string[]>([]);
+  const [currentRedBanList, setCurrentRedBanList] = usestate<string[]>([]);
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
   const handleChampionPickConfirm = () => {};
@@ -28,7 +31,7 @@ const LocalPB = () => {
         </div>
         <ChampionSelect
           selectedChampionList={selectedList}
-          bannedChampionList={bannedList}
+          bannedChampionList={currentBlueBanList}
           championData={championData}
         />
 
