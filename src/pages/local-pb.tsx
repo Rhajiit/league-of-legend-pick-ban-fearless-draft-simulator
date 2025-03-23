@@ -1,23 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChampionSelect from "../components/champion-select/champion-select-main";
 import championRawData from "../mocks/champion.json";
 import { ChampionDataListType } from "../types/championDataType";
 
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  BannedChampionsStateType,
+  clearChampionAll,
+} from "../utils/redux/ban-data/ban-data";
+
 const championData: ChampionDataListType = championRawData.data;
 
 const LocalPB = () => {
-  const [globalBanList, setGlobalBanList] = useState<string[]>([]);
   const [blueTeamFearlessBanList, setBlueTeamFearlessBanList] = useState<
     string[]
   >([]);
   const [redTeamFearlessBanList, setRedTeamFearlessBanList] = useState<
     string[]
   >([]);
-  const [currentBlueBanList, setCurrentBlueBanList] = useState<string[]>([]);
-  const [currentRedBanList, setCurrentRedBanList] = usestate<string[]>([]);
   const [selectedList, setSelectedList] = useState<string[]>([]);
 
-  const handleChampionPickConfirm = () => {};
+  const dispatch = useDispatch();
+
+  const championGlobalBanList = useSelector(
+    (state: BannedChampionsStateType) => state.globalChampionBan,
+  );
+
+  const handleClearChampionData = () => {
+    dispatch(clearChampionAll());
+  };
+
+  useEffect(() => {
+    console.log(championGlobalBanList);
+  }, [championGlobalBanList]);
 
   return (
     <>
@@ -46,7 +62,7 @@ const LocalPB = () => {
         <button
           type="button"
           className="mx-auto mt-2 block cursor-pointer border px-10 py-3"
-          onClick={() => handleChampionPickConfirm()}
+          onClick={() => handleClearChampionData()}
         >
           pick
         </button>
