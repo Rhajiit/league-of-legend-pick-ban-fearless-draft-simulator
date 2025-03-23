@@ -1,10 +1,7 @@
 import { useDispatch } from "react-redux";
 import { ChampionDataType } from "../types/championDataType";
-import {
-  addChampionToGlobalBanList,
-  BannedChampionsStateType,
-} from "../utils/redux/ban-data/ban-data";
-import { useSelector } from "react-redux";
+import { addChampionToGlobalBanList } from "../utils/redux/ban-data/ban-data";
+import { useTotalBan } from "../utils/redux/ban-data/hooks";
 
 const ChampionPortrait = ({
   championData,
@@ -17,11 +14,7 @@ const ChampionPortrait = ({
     dispatch(addChampionToGlobalBanList(champion));
   };
 
-  const banList = useSelector((state: BannedChampionsStateType) => [
-    ...state.globalChampionBan,
-    ...state.blueChampionBan,
-    ...state.redChampionBan,
-  ]);
+  const banList = useTotalBan();
 
   const bannedChampion = banList.includes(championData.name);
   const selectedChampion = championData.name === "Ahri" ? true : false;

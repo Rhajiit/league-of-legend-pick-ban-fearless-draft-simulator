@@ -1,39 +1,25 @@
-import { useEffect, useState } from "react";
 import ChampionSelect from "../components/champion-select/champion-select-main";
 import championRawData from "../mocks/champion.json";
 import { ChampionDataListType } from "../types/championDataType";
 
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {
-  BannedChampionsStateType,
-  clearChampionAll,
-} from "../utils/redux/ban-data/ban-data";
+import { clearChampionAll } from "../utils/redux/ban-data/ban-data";
+import { useTotalBan } from "../utils/redux/ban-data/hooks";
+import { useEffect } from "react";
 
 const championData: ChampionDataListType = championRawData.data;
 
 const LocalPB = () => {
-  const [blueTeamFearlessBanList, setBlueTeamFearlessBanList] = useState<
-    string[]
-  >([]);
-  const [redTeamFearlessBanList, setRedTeamFearlessBanList] = useState<
-    string[]
-  >([]);
-  const [selectedList, setSelectedList] = useState<string[]>([]);
-
   const dispatch = useDispatch();
-
-  const championGlobalBanList = useSelector(
-    (state: BannedChampionsStateType) => state.globalChampionBan,
-  );
+  const totalBanList = useTotalBan();
 
   const handleClearChampionData = () => {
     dispatch(clearChampionAll());
   };
 
   useEffect(() => {
-    console.log(championGlobalBanList);
-  }, [championGlobalBanList]);
+    console.log(totalBanList);
+  }, [totalBanList]);
 
   return (
     <>
@@ -45,11 +31,7 @@ const LocalPB = () => {
           </div>
           <div className="h-52">Previous Select</div>
         </div>
-        <ChampionSelect
-          selectedChampionList={selectedList}
-          bannedChampionList={currentBlueBanList}
-          championData={championData}
-        />
+        <ChampionSelect championData={championData} />
 
         <div className="flex w-full flex-col justify-between border">
           <div>

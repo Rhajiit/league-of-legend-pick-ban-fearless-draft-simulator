@@ -9,16 +9,10 @@ import ChampionPortrait from "../portrait";
 import { championTypes } from "../../utils/constants/champion-type";
 
 interface ComponentChampionSelectType {
-  selectedChampionList: string[];
-  bannedChampionList: string[];
   championData: ChampionDataListType;
 }
 
-const ChampionSelect = ({
-  selectedChampionList,
-  bannedChampionList,
-  championData,
-}: ComponentChampionSelectType) => {
+const ChampionSelect = ({ championData }: ComponentChampionSelectType) => {
   const [tagFilter, setTagFilter] = useState<ChampionTagType>(null);
   const [nameFilter, setNameFilter] = useState<string>("");
   const [timer, setTimer] = useState<number>(90);
