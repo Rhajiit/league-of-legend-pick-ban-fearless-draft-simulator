@@ -3,8 +3,8 @@ import championRawData from "../mocks/champion.json";
 import { ChampionDataListType } from "../types/championDataType";
 
 import { useDispatch } from "react-redux";
-import { clearChampionAll } from "../utils/redux/ban-data/ban-data";
-import { useTotalBan } from "../utils/redux/ban-data/hooks";
+import { clearChampionAll } from "../utils/redux/ban-champion/ban-champion";
+import { useTotalBan } from "../utils/redux/ban-champion/hooks";
 import { useEffect } from "react";
 
 const championData: ChampionDataListType = championRawData.data;

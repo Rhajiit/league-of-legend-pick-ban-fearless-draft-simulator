@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App.tsx";
 import LocalPB from "./pages/local-pb.tsx";
 import { Provider } from "react-redux";
-import store from "./utils/redux/ban-data/ban-data.ts";
+import store from "./utils/redux/ban-champion/ban-champion.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

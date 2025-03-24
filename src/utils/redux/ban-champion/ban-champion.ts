@@ -14,7 +14,7 @@ const initialState: BannedChampionsStateType = {
 };
 
 const BannedChampionsState = createSlice({
-  name: "BannedChampions",
+  name: "SelectedChampions",
   initialState,
   reducers: {
     // 챔피언을 밴리스트에 추가

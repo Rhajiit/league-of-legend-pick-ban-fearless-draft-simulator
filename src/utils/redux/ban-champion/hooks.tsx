@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { BannedChampionsStateType } from "./ban-data";
+import { BannedChampionsStateType } from "./ban-champion";
 import { useMemo } from "react";
 
 const useTotalBan = () => {
