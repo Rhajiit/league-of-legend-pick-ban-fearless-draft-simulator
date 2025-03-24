@@ -1,24 +1,45 @@
 import championRawData from "../mocks/champion.json";
 import { ChampionDataListType } from "../types/championDataType";
 import { useDispatch } from "react-redux";
-import { clearChampionAll } from "../utils/redux/ban-champion/ban-champion";
-import { useTotalBan } from "../utils/redux/ban-champion/hooks";
-import { useEffect } from "react";
 import ChampionSelect from "../components/champion-select/champion-select-main";
+import {
+  useCurrentPhaseName,
+  useCurrentPhaseTarget,
+} from "../utils/redux/phase/hooks";
+import {
+  addChampionToBlueBanList,
+  addChampionToRedBanList,
+} from "../utils/redux/ban-champion/ban-champion";
+import {
+  addSelectedChampionToBlue,
+  addSelectedChampionToRed,
+} from "../utils/redux/select-champion/select-champion";
+import { progressNextPhase } from "../utils/redux/phase/phase";
 
 const championData: ChampionDataListType = championRawData.data;
 
 const LocalPB = () => {
   const dispatch = useDispatch();
-  const totalBanList = useTotalBan();
+  const currentPhaseName = useCurrentPhaseName();
+  const targetChampion = useCurrentPhaseTarget();
 
   const handleClearChampionData = () => {
-    dispatch(clearChampionAll());
-  };
+    switch (currentPhaseName) {
+      case "blueBan":
+        dispatch(addChampionToBlueBanList(targetChampion));
+        break;
+      case "blueSelect":
+        dispatch(addSelectedChampionToBlue(targetChampion));
+        break;
+      case "redBan":
+        dispatch(addChampionToRedBanList(targetChampion));
+        break;
+      case "redSelect":
+        dispatch(addSelectedChampionToRed(targetChampion));
+    }
 
-  useEffect(() => {
-    console.log(totalBanList);
-  }, [totalBanList]);
+    dispatch(progressNextPhase());
+  };
 
   return (
     <>
@@ -45,7 +66,7 @@ const LocalPB = () => {
           className="mx-auto mt-2 block cursor-pointer border px-10 py-3"
           onClick={() => handleClearChampionData()}
         >
-          pick
+          confirm
         </button>
       </div>
     </>

@@ -1,31 +1,32 @@
 import { useDispatch } from "react-redux";
 import { ChampionDataType } from "../types/championDataType";
-import { addChampionToGlobalBanList } from "../utils/redux/ban-champion/ban-champion";
 import { useTotalBan } from "../utils/redux/ban-champion/hooks";
 import { useTotalSelect } from "../utils/redux/select-champion/hooks";
-import { useState } from "react";
+import { useCurrentPhaseTarget } from "../utils/redux/phase/hooks";
+import { setCurrentPhaseTarget } from "../utils/redux/phase/phase";
 
 const ChampionPortrait = ({
   championData,
 }: {
   championData: ChampionDataType;
 }) => {
-  const [selected, setSelected] = useState(false);
   const dispatch = useDispatch();
-
-  const handleSelectChampion = (champion: string) => {
-    dispatch(addChampionToGlobalBanList(champion));
-  };
 
   const banList = useTotalBan();
   const selectedList = useTotalSelect();
+  const focusedChampion = useCurrentPhaseTarget();
+
+  const handleSelectChampion = (champion: string) => {
+    dispatch(setCurrentPhaseTarget(champion));
+  };
 
   const bannedChampion = banList.includes(championData.name);
   const selectedChampion = selectedList.includes(championData.name);
+  const isCurrentFocused = focusedChampion === championData.name;
 
   return (
     <button
-      className="relative flex w-20 cursor-default flex-col items-center bg-white"
+      className="group relative flex w-20 cursor-default flex-col items-center bg-white"
       type="button"
       onClick={() => handleSelectChampion(championData.name)}
     >
@@ -37,7 +38,9 @@ const ChampionPortrait = ({
         <div className="absolute h-20 w-20 border-4 border-red-600"></div>
       )}
 
-      <div className="absolute top-1 left-1 hidden h-18 w-18 rounded-full border-8 border-cyan-800" />
+      <div
+        className={`absolute h-20 w-20 animate-pulse border-[6px] border-cyan-700 ${selectedChampion || bannedChampion ? "hidden cursor-default" : "cursor-pointer group-hover:block"} ${isCurrentFocused && !(selectedChampion || bannedChampion) ? "hover: block cursor-pointer" : "hidden"}`}
+      />
 
       <p
         className={`max-w-full truncate ${bannedChampion ? "text-red-600" : ""}`}

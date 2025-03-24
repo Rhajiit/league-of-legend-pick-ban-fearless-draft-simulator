@@ -1,36 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import defaultPickAndBanPhase, {
+  PhaseType,
+} from "../../constants/default-pick-and-ban-phase";
 
-type PhaseType = "blueSelect" | "redSelect" | "blueBan" | "redBan";
 type ChangePhaseOrder = [number, number];
 interface PhaseStateType {
   phases: PhaseType[];
   currentPhaseIndex: number;
+  currentPhaseTarget: string;
 }
 
 const initialState: PhaseStateType = {
-  phases: [
-    "blueBan",
-    "redBan",
-    "blueBan",
-    "redBan",
-    "blueBan",
-    "redBan",
-    "blueSelect",
-    "redSelect",
-    "redSelect",
-    "blueSelect",
-    "blueSelect",
-    "redSelect",
-    "blueBan",
-    "redBan",
-    "blueBan",
-    "redBan",
-    "redSelect",
-    "blueSelect",
-    "blueSelect",
-    "redSelect",
-  ],
+  phases: defaultPickAndBanPhase,
   currentPhaseIndex: 0,
+  currentPhaseTarget: "",
 };
 
 const PhaseSlice = createSlice({
@@ -54,34 +37,21 @@ const PhaseSlice = createSlice({
       state.phases[secondIndex] = firstPhase;
     },
 
+    // 현재 페이즈에서 다룰 챔피언
+    setCurrentPhaseTarget: (state, action: PayloadAction<string>) => {
+      state.currentPhaseTarget = action.payload;
+    },
+
+    resetTarget: (state) => {
+      state.currentPhaseTarget = "";
+    },
     // 현재 진행된 단계를 초기화
     resetPhaseIndex: (state) => {
       state.currentPhaseIndex = 0;
     },
 
     resetPhaseOrder: (state) => {
-      state.phases = [
-        "blueBan",
-        "redBan",
-        "blueBan",
-        "redBan",
-        "blueBan",
-        "redBan",
-        "blueSelect",
-        "redSelect",
-        "redSelect",
-        "blueSelect",
-        "blueSelect",
-        "redSelect",
-        "blueBan",
-        "redBan",
-        "blueBan",
-        "redBan",
-        "redSelect",
-        "blueSelect",
-        "blueSelect",
-        "redSelect",
-      ];
+      state.phases = defaultPickAndBanPhase;
     },
   },
 });
@@ -93,6 +63,8 @@ export default PhaseSlice;
 export const {
   progressNextPhase,
   changePhaseOrder,
+  setCurrentPhaseTarget,
   resetPhaseIndex,
   resetPhaseOrder,
+  resetTarget,
 } = PhaseSlice.actions;

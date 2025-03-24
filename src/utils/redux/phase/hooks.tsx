@@ -16,4 +16,12 @@ const useCurrentPhaseName = () => {
   return currentPhaseName;
 };
 
-export { useCurrentPhaseName };
+const useCurrentPhaseTarget = () => {
+  const target = useSelector(
+    (state: rootStoreType) => state.Phase.currentPhaseTarget,
+  );
+
+  return target;
+};
+
+export { useCurrentPhaseName, useCurrentPhaseTarget };
