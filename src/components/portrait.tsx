@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { ChampionDataType } from "../types/championDataType";
 import { addChampionToGlobalBanList } from "../utils/redux/ban-champion/ban-champion";
 import { useTotalBan } from "../utils/redux/ban-champion/hooks";
-// import { useTotalSelect } from "../utils/redux/select-champion/hooks";
+import { useTotalSelect } from "../utils/redux/select-champion/hooks";
 
 const ChampionPortrait = ({
   championData,
@@ -16,12 +16,10 @@ const ChampionPortrait = ({
   };
 
   const banList = useTotalBan();
-  // const selectedList = useTotalSelect();
+  const selectedList = useTotalSelect();
 
   const bannedChampion = banList.includes(championData.name);
-  const selectedChampion = true;
-
-  //selectedList.includes(championData.name);
+  const selectedChampion = selectedList.includes(championData.name);
   const focusedChampion = championData.name === "Akali" ? true : false;
 
   return (
