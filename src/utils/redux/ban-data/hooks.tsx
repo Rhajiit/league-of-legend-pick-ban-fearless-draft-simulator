@@ -1,12 +1,21 @@
 import { useSelector } from "react-redux";
 import { BannedChampionsStateType } from "./ban-data";
+import { useMemo } from "react";
 
 const useTotalBan = () => {
-  const totalBan = useSelector((state: BannedChampionsStateType) => [
-    ...state.globalChampionBan,
-    ...state.blueChampionBan,
-    ...state.redChampionBan,
-  ]);
+  const globalChampionBan = useSelector(
+    (state: BannedChampionsStateType) => state.globalChampionBan,
+  );
+  const blueChampionBan = useSelector(
+    (state: BannedChampionsStateType) => state.blueChampionBan,
+  );
+  const redChampionBan = useSelector(
+    (state: BannedChampionsStateType) => state.redChampionBan,
+  );
+
+  const totalBan = useMemo(() => {
+    return [...globalChampionBan, ...blueChampionBan, ...redChampionBan];
+  }, [globalChampionBan, blueChampionBan, redChampionBan]);
 
   return totalBan;
 };
