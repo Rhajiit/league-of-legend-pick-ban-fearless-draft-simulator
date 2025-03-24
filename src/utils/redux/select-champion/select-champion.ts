@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { configureStore } from "@reduxjs/toolkit";
 
 interface SelectedChampionStateType {
   selectedBlueChampion: string[];
@@ -11,7 +10,7 @@ const initialState: SelectedChampionStateType = {
   selectedRedChampion: [],
 };
 
-const SelectedChampionState = createSlice({
+const SelectedChampionSlice = createSlice({
   name: "SelectedChampions",
   initialState,
   reducers: {
@@ -37,11 +36,9 @@ const SelectedChampionState = createSlice({
   },
 });
 
-const store = configureStore({ reducer: SelectedChampionState.reducer });
-
 export type { SelectedChampionStateType };
 
-export default store;
+export default SelectedChampionSlice;
 
 export const {
   addSelectedChampionToBlue,
@@ -49,4 +46,4 @@ export const {
   clearSelectedChampionFromBlue,
   clearSelectedChampionFromRed,
   clearSelectedChampionAll,
-} = SelectedChampionState.actions;
+} = SelectedChampionSlice.actions;

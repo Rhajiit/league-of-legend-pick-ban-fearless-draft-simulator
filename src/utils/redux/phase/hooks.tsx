@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { PhaseStateType } from "./phase";
 import { useMemo } from "react";
+import { rootStoreType } from "../sliceCombiner";
 
 const useCurrentPhaseName = () => {
-  const phases = useSelector((state: PhaseStateType) => state.phases);
+  const phases = useSelector((state: rootStoreType) => state.Phase.phases);
   const currentPhaseIndex = useSelector(
-    (state: PhaseStateType) => state.currentPhaseIndex,
+    (state: rootStoreType) => state.Phase.currentPhaseIndex,
   );
 
   const currentPhaseName = useMemo(

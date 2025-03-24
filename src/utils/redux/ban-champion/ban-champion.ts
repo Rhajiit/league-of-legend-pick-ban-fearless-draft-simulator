@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { configureStore } from "@reduxjs/toolkit";
 
 interface BannedChampionsStateType {
   blueChampionBan: string[];
@@ -13,8 +12,8 @@ const initialState: BannedChampionsStateType = {
   globalChampionBan: [],
 };
 
-const BannedChampionsState = createSlice({
-  name: "SelectedChampions",
+const BannedChampionsSlice = createSlice({
+  name: "BannedChampions",
   initialState,
   reducers: {
     // 챔피언을 밴리스트에 추가
@@ -43,11 +42,9 @@ const BannedChampionsState = createSlice({
   },
 });
 
-const store = configureStore({ reducer: BannedChampionsState.reducer });
-
 export type { BannedChampionsStateType };
 
-export default store;
+export default BannedChampionsSlice;
 
 export const {
   addChampionToGlobalBanList,
@@ -56,4 +53,4 @@ export const {
   clearChampionFromBlueBanList,
   clearChampionFromRedBanList,
   clearChampionAll,
-} = BannedChampionsState.actions;
+} = BannedChampionsSlice.actions;

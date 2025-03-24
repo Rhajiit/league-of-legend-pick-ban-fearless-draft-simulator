@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
-import { BannedChampionsStateType } from "./ban-champion";
 import { useMemo } from "react";
+import { rootStoreType } from "../sliceCombiner";
 
 const useTotalBan = () => {
   const globalChampionBan = useSelector(
-    (state: BannedChampionsStateType) => state.globalChampionBan,
+    (state: rootStoreType) => state.BannedChampions.globalChampionBan,
   );
   const blueChampionBan = useSelector(
-    (state: BannedChampionsStateType) => state.blueChampionBan,
+    (state: rootStoreType) => state.BannedChampions.blueChampionBan,
   );
   const redChampionBan = useSelector(
-    (state: BannedChampionsStateType) => state.redChampionBan,
+    (state: rootStoreType) => state.BannedChampions.redChampionBan,
   );
 
   const totalBan = useMemo(() => {
@@ -22,7 +22,7 @@ const useTotalBan = () => {
 
 const useRedBan = () => {
   const redBan = useSelector(
-    (state: BannedChampionsStateType) => state.redChampionBan,
+    (state: rootStoreType) => state.BannedChampions.redChampionBan,
   );
 
   return redBan;
@@ -30,7 +30,7 @@ const useRedBan = () => {
 
 const useBlueBan = () => {
   const blueBan = useSelector(
-    (state: BannedChampionsStateType) => state.blueChampionBan,
+    (state: rootStoreType) => state.BannedChampions.blueChampionBan,
   );
 
   return blueBan;

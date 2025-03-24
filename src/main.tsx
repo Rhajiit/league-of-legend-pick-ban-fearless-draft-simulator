@@ -5,12 +5,12 @@ import "./index.css";
 import App from "./App.tsx";
 import LocalPB from "./pages/local-pb.tsx";
 import { Provider } from "react-redux";
-import store from "./utils/redux/ban-champion/ban-champion.ts";
+import rootStore from "./utils/redux/sliceCombiner.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={rootStore}>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/local" element={<LocalPB />} />

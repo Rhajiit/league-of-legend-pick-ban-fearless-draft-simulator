@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { configureStore } from "@reduxjs/toolkit";
 
 type PhaseType = "blueSelect" | "redSelect" | "blueBan" | "redBan";
 type ChangePhaseOrder = [number, number];
@@ -34,7 +33,7 @@ const initialState: PhaseStateType = {
   currentPhaseIndex: 0,
 };
 
-const PhaseState = createSlice({
+const PhaseSlice = createSlice({
   name: "Phase",
   initialState,
   reducers: {
@@ -87,15 +86,13 @@ const PhaseState = createSlice({
   },
 });
 
-const phaseStore = configureStore({ reducer: PhaseState.reducer });
-
 export type { PhaseStateType };
 
-export default phaseStore;
+export default PhaseSlice;
 
 export const {
   progressNextPhase,
   changePhaseOrder,
   resetPhaseIndex,
   resetPhaseOrder,
-} = PhaseState.actions;
+} = PhaseSlice.actions;
